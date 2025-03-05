@@ -4,12 +4,11 @@
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="layout/plantilla :: head">    </head>
     <body >
-        <header th:replace ="layout/plantilla :: header"></header>
-        
-        <section th:replace="categoria/fragmentos :: botonesAgregar"/>
-       <section th:replace="categoria/fragmentos :: listadoCategorias"/> 
-        <section th:replace="categoria/fragmentos :: agregarCategoria"/>
 
+        <header th:replace ="layout/plantilla :: header"></header>
+
+        <section th:replace="producto/fragmentos :: editarProducto"/>
+        
         <footer th:replace ="layout/plantilla :: footer"></footer>
     </body>
 </html>
