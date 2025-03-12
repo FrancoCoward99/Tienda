@@ -30,6 +30,9 @@ public class ProductoController {
     @RequestMapping("/listado")
     public String listado(Model model) {
         List<Producto> productos = productoService.getProductos(false);
+       
+        
+        
 
         List<Categoria> listaCategoriasActivas = categoriaService.getCategorias(true);
 
