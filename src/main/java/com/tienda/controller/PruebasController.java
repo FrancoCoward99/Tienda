@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.tienda.service.ProductoService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -63,20 +64,19 @@ public class PruebasController {
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
-    
+
     @PostMapping("/query2")
     public String consultaQuery2(@RequestParam(value = "precioInf") double precioInf,
             @RequestParam(value = "precioSup") double precioSup, Model model) {
         var productos = productoService.metodoJPQL(precioInf, precioSup);
-        model.addAttribute("productos", productos);        
+        model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());
         model.addAttribute("precioInf", precioInf);
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
 
-
-     @PostMapping("/query3")
+    @PostMapping("/query3")
     public String consultaQuery3(@RequestParam(value = "precioInf") double precioInf,
             @RequestParam(value = "precioSup") double precioSup, Model model) {
         var productos = productoService.metodoNativo(precioInf, precioSup);
@@ -85,6 +85,20 @@ public class PruebasController {
         model.addAttribute("precioInf", precioInf);
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
+    }
+
+    @RequestMapping(value = "/mas-vendidos", method = {RequestMethod.GET, RequestMethod.POST})
+    public String obtenerProductoMasVendido(@RequestParam(value = "idCategoria", required = false) Integer idCategoria, Model model) {
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+
+        if (idCategoria != null) {
+            var producto = productoService.getMostSoldProductByCategory(idCategoria);
+            model.addAttribute("producto", producto);
+            model.addAttribute("categoriaSeleccionada", idCategoria);
+        }
+
+        return "/pruebas/practica4";
     }
 
 }

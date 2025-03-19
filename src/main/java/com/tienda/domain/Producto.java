@@ -33,16 +33,15 @@ public class Producto implements Serializable {
     private double precio;
     private boolean activo;
 
-    
     @ManyToOne
-    @JoinColumn(name="idCategoria")
+    @JoinColumn(name = "idCategoria")
     private Categoria categoria;
-    
+
     public Producto() {
     }
 
     public Producto(String descripcion, String detalle, int exitencias, String rutaImagen, double precio, boolean activo) {
-        
+
         this.descripcion = descripcion;
         this.detalle = detalle;
         this.existencias = existencias;
@@ -50,5 +49,7 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.activo = activo;
     }
+
+
 
 }

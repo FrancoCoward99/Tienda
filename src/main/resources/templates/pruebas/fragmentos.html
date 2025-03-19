@@ -126,7 +126,7 @@
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
                 <div class="col-md-3">
                     <form method="POST" th:action="@{/pruebas/query3}" 
@@ -156,6 +156,48 @@
                 </div>
             </div>
         </section> 
+
+
+
+        <!-- Filtro para seleccionar una categoría y ver el producto más vendido -->
+        <section th:fragment="filtros2" class="bg-light">
+            <div class="col-md-3">
+                <form method="POST" th:action="@{/pruebas/mas-vendidos}" class="was-validated">
+
+                    <div class="card success">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="categoria.idCategoria">Seleccione una Categoría</label>
+                                <select class="form-select" name="idCategoria" required>
+                                    <option value="">Seleccione una categoría</option>
+                                    <option th:each="c : ${categorias}" th:value="${c.idCategoria}" th:text="${c.descripcion}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-chart-line"></i> Ver Producto Más Vendido
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- Listado de producto mas vendido -->
+        <section th:fragment="listadoProductos2" id="productos" th:if="${producto != null}">
+            <div class="card text-center mt-3">
+                <div class="card-header bg-primary text-white">
+                    Producto Más Vendido
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${producto.descripcion}"></h5>
+                    <p class="card-text">Precio: <span th:text="${producto.precio}"></span></p>
+                    <p class="card-text">Existencias: <span th:text="${producto.existencias}"></span></p>
+                    <img th:src="${producto.rutaImagen}" alt="Imagen del Producto" class="img-fluid" style="max-width: 200px;">
+                </div>
+            </div>
+        </section>
 
 
     </body>
